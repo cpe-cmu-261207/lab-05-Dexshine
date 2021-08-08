@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react'
 import Header from './components/Header1';
+import Footer from './components/Footer';
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
         <div>
           {/* task example */}
           {/* Please convert this into a task component */}
-          <div
+          {/* <div
             className="flex justify-between h-8 items-center py-6 border-b"
           >
             <span className="text-2xl"> I am a task </span>
@@ -34,10 +35,10 @@ function App() {
               <button className="bg-green-400 w-24 text-2xl" >Done</button>
               <button className="bg-red-400 w-24 text-2xl" >Delete</button>
             </div>
-          </div>
+          </div> */}
 
           {/* another task example */}
-          <div
+          {/* <div
             className="flex justify-between h-8 items-center py-6 border-b"
           >
             <span className="text-2xl"> I am another task </span>
@@ -45,13 +46,13 @@ function App() {
               <button className="bg-green-400 w-24 text-2xl" >Done</button>
               <button className="bg-red-400 w-24 text-2xl" >Delete</button>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>
 
       {/* footer section */}
-      <p className='text-center text-gray-400'> ... </p>
+      <Footer></Footer>
     </div>
   );
 }
