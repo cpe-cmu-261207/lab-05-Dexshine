@@ -1,19 +1,19 @@
 import {useState} from 'react'
 import React from 'react'
 import Task from './Task'
-import { isDoStatement } from 'typescript'
+
 type TaskData = {
     id: number;
     name: string;
-    isDone: boolean;
+    isDone: boolean;//if (true) hide button and marked text.
 }
 const TodoList = () => {
-    const [curTask, setCurTask] = useState<string>('')
-    const [tasks, setTask] = useState<TaskData[]>([])
-    const [doneTasks, setDoneTask] = useState<TaskData[]>([])
+    const [curTask, setCurTask] = useState<string>('') //curTask come from input
+    const [tasks, setTask] = useState<TaskData[]>([]) //list for normal task
+    const [doneTasks, setDoneTask] = useState<TaskData[]>([]) //list for done task
 
     const onChangeCallback = (ev: React.ChangeEvent<HTMLInputElement>) => {
-        setCurTask(ev.target.value)
+        setCurTask(ev.target.value) //value from input box
     }
     const onKeyDownCallback = (ev: React.KeyboardEvent<HTMLInputElement>) => {
         /* check pressing enter key here */
@@ -55,7 +55,7 @@ const TodoList = () => {
 
         {/* task input and add button */}
         <div className='flex space-x-1'>
-            <input className='border border-gray-400 w-full text-2xl' onKeyDown={onKeyDownCallback} onChange={onChangeCallback}></input>
+            <input id='this' className='border border-gray-400 w-full text-2xl' onKeyDown={onKeyDownCallback} onChange={onChangeCallback}></input>
             <button className='border border-gray-400 w-8 font-bold' onClick={() => addTask(curTask)}>+</button>
         </div>
 
