@@ -4,15 +4,19 @@ type TaskProps = {
     name: string;
     doneFn: Function;
     deleteFn: Function;
-    isDone: number;
+    isDone: boolean;
 }
 
 const Task = ({id, name, doneFn, deleteFn, isDone} : TaskProps) => {
     //check if name has mark on it
     const doneTask = <del>{name}</del>
     let task = <span className="text-2xl">{doneTask}</span>
-    if(isDone == 1) task = <span className="text-2xl">{doneTask}</span>
-    else task = <span className="text-2xl">{name}</span>
+    if(isDone === true){
+        task = <span className="text-2xl">{doneTask}</span>
+    }
+    else{
+        task = <span className="text-2xl">{name}</span>
+    }
     //remember button visibility state
     const [show,setShow] = useState(false)
     return (

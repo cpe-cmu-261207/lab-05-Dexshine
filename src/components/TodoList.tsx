@@ -5,11 +5,12 @@ import { isDoStatement } from 'typescript'
 type TaskData = {
     id: number;
     name: string;
-    isDone: number;
+    isDone: boolean;
 }
 const TodoList = () => {
     const [curTask, setCurTask] = useState<string>('')
     const [tasks, setTask] = useState<TaskData[]>([])
+    const [doneTasks, setDoneTask] = useState<TaskData[]>([])
 
     const onChangeCallback = (ev: React.ChangeEvent<HTMLInputElement>) => {
         setCurTask(ev.target.value)
@@ -23,17 +24,17 @@ const TodoList = () => {
         if(taskName === ''){
             alert("Task cannot be empty")
         }else{
-            //
+            //use date.getTime() to get unique numeric id (https://www.w3schools.com/jsref/jsref_gettime.asp)
             const newId = (new Date()).getTime()
-            //
-            //
-            const newTasks = [{id: newId, name: taskName, isDone:0},...tasks]
+            // create new task list (หากจะ set ค่าให้กับตัวแปรที่สร้างจาก useState จะต้องสร้างข้อมูลใหม่หมดเสมอ)
+            // spread syntax [...array] (https://www.freecodecamp.org/news/array-destructuring-in-es6-30e398f21d10/)
+            const newTasks = [{id: newId, name: taskName, isDone:false},...tasks]
             setTask(newTasks)
         }
 
     }
     const deleteTask = (id: number) => {
-        //
+        // create new task list (หากจะ set ค่าให้กับตัวแปรที่สร้างจาก useState จะต้องสร้างข้อมูลใหม่หมดเสมอ)
         const newTasks = tasks.filter(x => x.id !== id)
         setTask(newTasks)
     }
@@ -42,10 +43,10 @@ const TodoList = () => {
         for(let i=0; i<tasks.length; i++){
             if(tasks[i].id === id){
                 const newName = tasks[i].name
-                const newTasks = [...tasks,{id: newId, name: newName, isDone:1}]
-                const newTasks2 = newTasks.filter(x => x.id !== id)
+                const doneTasks2= [{id: newId, name: newName, isDone:true},...doneTasks]//สร้าง Task ใหม่ ที่มีขีดฆ่าบนข้อความ ใส่ไปด้านบนของ doneTasks
+                setDoneTask(doneTasks2)
+                const newTasks2 = tasks.filter(x => x.id !== id)//ลบ Task ที่กด done
                 setTask(newTasks2)
-                console.log(newTasks)
             } 
         }
     }
@@ -61,6 +62,7 @@ const TodoList = () => {
         {/* tasks section */}
         <div>
             {tasks.map( x => <Task id={x.id} name={x.name} doneFn={doneTask} deleteFn={deleteTask} isDone={x.isDone}/>)}
+            {doneTasks.map( x => <Task id={x.id} name={x.name} doneFn={() => null} deleteFn={() => null} isDone={x.isDone}/>)}
         </div>
     </div>
     )
